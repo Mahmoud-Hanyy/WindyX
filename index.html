@@ -1,11 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WindyX</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherX</title>
+  </head>
+  <body>
+    <div class="weatherContainer">
+      <!-- the Left Section -->
+      <div class="left Section">
+        <h1 class="projectTitle">WeatherX</h1>
+        <div class="todayWeather">
+          <h2 class="temperature">20°</h2>
+          <h3 class="location">Alexandria</h3>
+          <p class="date-time">10:00 - Wednesday, 12 Mar '25</p>
+          <p class="weatherDescription">Rainy</p>
+        </div>
+        <div class="weatherForcast">
+          <div class="day">
+            <p>13 Mar '25</p>
+            <p>26°</p>
+          </div>
+          <div class="day">
+            <p>14 Mar '25</p>
+            <p>27°</p>
+          </div>
+          <div class="day">
+            <p>15 Mar '25</p>
+            <p>23°</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- the Right Section -->
+      <div class="rightSection">
+        <input type="text" class="searchInput" placeholder="Search for a city..." />
+        <select class="dropMenu">
+            <option>Select a city</option>
+            <option>Cairo, Egypt</option>
+            <option>London, UK</option>
+            <option>Rome, Italy</option>
+            <option>New York, USA</option>
+            <option>Tokyo, Japan</option>
+            <option>Sydney, Australia</option>
+        </select>
+        <div class="toggleDegree">
+            <label>°C</label>
+            <input type="checkbox" id="degree"/>
+            <label>°F</label>  
+        </div>
+        <div class="weatherDetails">
+            <p>Temperature <span class="temperature">20°</span></p>
+            <p>Weather Description <span class="weatherDescription">Rainy</span></p>
+            <p>Humidity <span class="weatherHumidity">25%</span></p>
+        </div>
     
-</body>
+    </div>
+    
+    
+    </div>
+  </body>
 </html>
