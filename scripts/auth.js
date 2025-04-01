@@ -8,17 +8,17 @@ const users = [
     { username: "Hussein", password: "Hussein" }
 ];
 
-//add event listner when page is loaded
+//add event listener when page is loaded
 document.addEventListener("DOMContentLoaded", () => {
     
     //get HTML elements
     const loginBtn = document.getElementById("loginBtn");
-    const errorText = document.getElementById("WrongPass");
+    const errorText = document.getElementById("wrongPass");
 
-    //initially hide WrongPass element
+    //initially hide wrongPass element
     errorText.style.display = "none";
 
-    //add event listner for button click
+    //add event listener for button click
     loginBtn.addEventListener("click", () => {
         //get HTML elements
         const username = document.getElementById("name").value.trim();
