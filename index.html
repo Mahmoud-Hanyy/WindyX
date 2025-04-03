@@ -3,38 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WeatherX</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>WindyX</title>
   </head>
   <body>
     <div class="weatherContainer">
+
       <!-- the Left Section -->
       <div class="left Section">
-        <h1 class="projectTitle">WeatherX</h1>
-        <div class="todayWeather">
-          <h2 class="temperature">20°</h2>
-          <h3 class="location">Alexandria</h3>
-          <p class="date-time">10:00 - Wednesday, 12 Mar '25</p>
-          <p class="weatherDescription">Rainy</p>
+        <div class="header">
+          <h1 class="projectTitle" id="projectTitle">WindyX</h1>
+          <button class="themeToggle" id="themeToggle">&#9775;</button>
         </div>
-        <div class="weatherForcast">
-          <div class="day">
-            <p>13 Mar '25</p>
+        <div class="greetingMessage">
+          <p class="greetUser" id="greetUser">Hello, <span class="username">User</span></p>
+        </div>
+        <div class="todayWeather">
+          <h2 class="temperature" id="todayTemp">20°</h2>
+          <div class="detailedWeather">
+            <h3 class="location" id="location">Alexandria</h3>
+            <p class="date-time" id="dateTime">
+              10:00 - Wednesday, 2 Apr '25
+            </p>  
+          </div>
+              <p class="weatherDescription" id="todayWeatherDesc">Rainy</p>
+        </div>
+        <div class="weatherForcast" id="weatherForecast">
+          <div class="day" id="day1">
+            <p>13 Apr '25</p>
             <p>26°</p>
+            <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
           </div>
-          <div class="day">
-            <p>14 Mar '25</p>
+          <div class="day" id="day2">
+            <p>14 Apr '25</p>
             <p>27°</p>
+            <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
           </div>
-          <div class="day">
-            <p>15 Mar '25</p>
+          <div class="day" id="day3">
+            <p>15 Apr '25</p>
             <p>23°</p>
+            <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
           </div>
         </div>
       </div>
 
       <!-- the Right Section -->
       <div class="rightSection">
-        <input type="text" class="searchInput" placeholder="Search for a city..." />
+        <div class="searchContainer">
+          <input type="text" 
+          class="searchInput" 
+          placeholder=" Search for a city..."
+          id="searchInput"/>
+        </div>
         <select class="dropMenu">
             <option>Select a city</option>
             <option>Cairo, Egypt</option>
@@ -44,20 +65,40 @@
             <option>Tokyo, Japan</option>
             <option>Sydney, Australia</option>
         </select>
-        <div class="toggleDegree">
+        <ul class="historyOfSearch">
+          <li>Cairo, Egypt</li>
+          <li>Berlin, Germany</li>
+          <li>London, UK</li>
+          <li>Rome, Italy</li>
+          <li>Madrid, Spain</li>
+        </ul>
+        <hr>
+        <div class="weatherDeatilsRow">
+          <h4 class="HeaderOfDetails">Weather details</h4>
+          <div class="toggleDegree">
             <label>°C</label>
             <input type="checkbox" id="degree"/>
-            <label>°F</label>  
+            <label>°F</label>
+            <input type="checkbox" id="degree"/>  
+          </div>
         </div>
-        <div class="weatherDetails">
-            <p>Temperature <span class="temperature">20°</span></p>
-            <p>Weather Description <span class="weatherDescription">Rainy</span></p>
-            <p>Humidity <span class="weatherHumidity">25%</span></p>
-        </div>
-    
-    </div>
-    
-    
+
+          <div class="weatherDetailsCol">
+            <ul class="weatherAttributes">
+              <li>Temperature</li>
+              <li>Weather Description</li>
+              <li>Humidity</li>
+              <li>Wind</li>
+            </ul>
+  
+            <ul class="weatherAttributesValues">
+              <li>27°</li>
+              <li>Sunny</li>
+              <li>23%</li>
+              <li>8km/h</li>
+            </ul>
+          </div>
+      </div>
     </div>
   </body>
 </html>
