@@ -1,9 +1,59 @@
-const apiKey= '9853aca6055d1f5c122be191411d006b';
+let apikey;
 const baseUrl = "https://api.openweathermap.org/";
-
 const weatherByCityEndPoint=baseUrl+ "data/2.5/forecast";
 
-//storage check should be handled here before fetching from the api
+fetch('api.json')
+  .then(response => response.json())
+  .then(data => {
+    apiKey = data.API_KEY;
+    initializeApp();
+  })
+  .catch(error => {
+    console.error("Error loading API key:", error);
+    alert("Failed to load API configuration. Please try again later.");
+  });
+
+  
+function initializeApp() {
+  document.querySelector('.dropMenu').addEventListener('change',function(){
+  
+    city = document.querySelector(".searchInput").value="";
+  
+    let cityValue= this.value;
+    let unit = document.getElementById("degreeToggle").checked ? 'imperial' : 'metric'; 
+  
+    
+  fetchWeatherByCity(cityValue,unit)
+  })
+  
+  document.getElementById("searchIcon").addEventListener("click", function () {
+    let city = document.querySelector(".searchInput").value;
+    let unit = document.getElementById("degreeToggle").checked ? 'imperial' : 'metric'; 
+    if (city) {
+      fetchWeatherByCity(city, unit); 
+      const dropMenu = document.querySelector('.dropMenu');
+      dropMenu.selectedIndex = 0
+    }
+  });
+  
+  document.getElementById("degreeToggle").addEventListener("change", function() {
+    let  citySearchValue=document.querySelector(".searchInput").value
+    let  cityMenuValue=document.querySelector('.dropMenu').value
+    let unit = this.checked ? 'imperial' : 'metric'; 
+  
+    if(citySearchValue==""){
+      cityMenuValue= document.querySelector('.dropMenu').value
+      fetchWeatherByCity(cityMenuValue, unit); 
+  
+    }else{
+      fetchWeatherByCity(citySearchValue, unit); 
+  
+    }
+    
+    
+  });
+  
+}
 function fetchWeatherByCity(city,unit){
 
 let url=weatherByCityEndPoint+`?q=${city}&units=${unit}&appid=${apiKey}`;
@@ -107,49 +157,13 @@ function displayDailyForecast(days, unit) {
   forecastDays.forEach((day, index) => {
     const dayElement = document.getElementById(`day${index + 1}`);
     if (dayElement) {
-      // Assuming the structure is <p>date</p><img><p>temp</p>
       dayElement.children[0].textContent = day.date;
-      dayElement.children[1].src = `https://openweathermap.org/img/wn/${day.icon}.png`;
-      dayElement.children[1].alt = day.description;
-      dayElement.children[2].textContent = 
+      dayElement.children[1].textContent = 
         `${Math.round(day.temp)}${unit === 'metric' ? '°C' : '°F'}`;
+      dayElement.children[2].src = `https://openweathermap.org/img/wn/${day.icon}.png`;
+      dayElement.children[2].alt = day.description;
+
     }
   });
 }
-document.querySelector('.dropMenu').addEventListener('change',function(){
-  city = document.querySelector(".searchInput").value="";
-
-  let cityValue= this.value;
-  let unit = document.getElementById("degreeToggle").checked ? 'imperial' : 'metric'; 
-
-  
-fetchWeatherByCity(cityValue,unit)
-})
-
-document.getElementById("searchIcon").addEventListener("click", function () {
-  let city = document.querySelector(".searchInput").value;
-  let unit = document.getElementById("degreeToggle").checked ? 'imperial' : 'metric'; 
-  if (city) {
-    fetchWeatherByCity(city, unit); 
-    const dropMenu = document.querySelector('.dropMenu');
-    dropMenu.selectedIndex = 0
-  }
-});
-
-document.getElementById("degreeToggle").addEventListener("change", function() {
-  let  citySearchValue=document.querySelector(".searchInput").value
-  let  cityMenuValue=document.querySelector('.dropMenu').value
-  let unit = this.checked ? 'imperial' : 'metric'; 
-
-  if(citySearchValue==""){
-    cityMenuValue= document.querySelector('.dropMenu').value
-    fetchWeatherByCity(cityMenuValue, unit); 
-
-  }else{
-    fetchWeatherByCity(citySearchValue, unit); 
-
-  }
-  
-  
-});
 
