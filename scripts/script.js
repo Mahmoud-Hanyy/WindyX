@@ -3,25 +3,26 @@ const baseUrl = "https://api.openweathermap.org/";
 
 const weatherByCityEndPoint=baseUrl+ "data/2.5/forecast";
 
+//storage check should be handled here before fetching from the api
 function fetchWeatherByCity(city,unit){
 
 let url=weatherByCityEndPoint+`?q=${city}&units=${unit}&appid=${apiKey}`;
-
  fetch(url)
  .then(response=>{
 
     if(!response.ok){
         alert("Please enter city's name correctly");
-    }
+        document.querySelector(".searchInput").value=""    }
     return response.json();
  })
  .then(weatherData=>{
   let location = weatherData.city.name;
     let currentWeather = weatherData.list[0];
+    let windSpeed=currentWeather.wind.speed;
+
     let currentTemp = currentWeather.main.temp;
     let currentDescription = currentWeather.weather[0].description;
     let currentHumidity = currentWeather.main.humidity;
- 
     const dailyForecasts = {};
       weatherData.list.forEach(forecast => {
         const date = new Date(forecast.dt * 1000);
@@ -61,76 +62,93 @@ let url=weatherByCityEndPoint+`?q=${city}&units=${unit}&appid=${apiKey}`;
           description: maxTempForecast.weather[0].description
         };
       });
-      
+     const icon=processedDays[0].icon;
       const firstDay = processedDays[0];
       let dateTime = firstDay.date;
-            
       displayDailyForecast(processedDays.slice(1), unit);
           
-      displayCurrentWeather(location,currentTemp,currentDescription,currentHumidity,dateTime,unit);
-    }
+      displayCurrentWeather(location,currentTemp,currentDescription,
+        currentHumidity,dateTime,unit,windSpeed,icon);
+
+      }
    
    )
  .catch(_=>{
-    alert("please chech internet connection")
+    alert("please check internet connection")
   }
  );
 }
 
 
 
-function displayCurrentWeather(city,currentTemp,currentDescription,currentHumidity,dateTime,unit){
-  document.querySelector(".location").innerHTML=city;
-    document.querySelectorAll(".weatherDescription").forEach(el => el.innerHTML = currentDescription);
-    document.querySelector(".weatherHumidity").innerHTML = currentHumidity;
-    document.querySelector(".date-time").innerHTML=dateTime;
-if(unit=='metric'){
-    document.querySelectorAll(".temperature").forEach(el => el.innerHTML = currentTemp+" °C");
+function displayCurrentWeather(city,currentTemp,currentDescription,currentHumidity,dateTime,unit,windSpeed,icon){
+  document.querySelectorAll(".location").forEach(el => el.innerHTML = city);
+  document.querySelectorAll(".weatherDescription").forEach(el =>{ el.innerHTML = currentDescription
 
-}else{
-  document.querySelectorAll(".temperature").forEach(el => el.innerHTML = currentTemp+" °F");
+    el.style.setProperty('--weather-icon', `url('https://openweathermap.org/img/wn/${icon}.png')`);
 
-}
+  });
+  document.querySelectorAll(".weatherHumidity").forEach(el => el.innerHTML = `${currentHumidity}%`);
+  document.querySelectorAll(".right-weatherDescription").forEach(el => el.innerHTML = currentDescription);
+  document.querySelectorAll(".right-weatherHumidity").forEach(el => el.innerHTML = `${currentHumidity}%`);
+  document.querySelectorAll(".date-time").forEach(el => el.innerHTML = dateTime);
+  const tempText = `${currentTemp} ${unit === 'metric' ? '°C' : '°F'}`;
+  document.querySelectorAll(".temperature").forEach(el => el.innerHTML = tempText);
+  document.querySelectorAll(".right-temperature").forEach(el => el.innerHTML = tempText);
+  document.querySelectorAll(".right-weatherWind").forEach(el => el.innerHTML = windSpeed+" m/sec");
+  
 
 }
 
 
 function displayDailyForecast(days, unit) {
-  const forecastContainer = document.querySelector('.weatherForcast');
-  forecastContainer.innerHTML = '';
+  const forecastDays = days.slice(0, 3);
   
-  days.forEach(day => {
-    const dayElement = document.createElement('div');
-    dayElement.className = 'day';
-    
-    dayElement.innerHTML = `
-      <p>${day.date}</p>
-      <img src="https://openweathermap.org/img/wn/${day.icon}.png" alt="${day.description}">
-      <p>${Math.round(day.temp)}${unit === 'metric' ? '°C' : '°F'}</p>
-    `;
-    
-    forecastContainer.appendChild(dayElement);
+  forecastDays.forEach((day, index) => {
+    const dayElement = document.getElementById(`day${index + 1}`);
+    if (dayElement) {
+      // Assuming the structure is <p>date</p><img><p>temp</p>
+      dayElement.children[0].textContent = day.date;
+      dayElement.children[1].src = `https://openweathermap.org/img/wn/${day.icon}.png`;
+      dayElement.children[1].alt = day.description;
+      dayElement.children[2].textContent = 
+        `${Math.round(day.temp)}${unit === 'metric' ? '°C' : '°F'}`;
+    }
   });
 }
-
 document.querySelector('.dropMenu').addEventListener('change',function(){
-  let value= this.value;
-  checkWeatherUnit(value);
+  city = document.querySelector(".searchInput").value="";
 
+  let cityValue= this.value;
+  let unit = document.getElementById("degreeToggle").checked ? 'imperial' : 'metric'; 
+
+  
+fetchWeatherByCity(cityValue,unit)
 })
 
-document.getElementById("search-button").addEventListener("click", function () {
+document.getElementById("searchIcon").addEventListener("click", function () {
   let city = document.querySelector(".searchInput").value;
-  let unit = document.getElementById("degree").checked ? 'imperial' : 'metric'; 
+  let unit = document.getElementById("degreeToggle").checked ? 'imperial' : 'metric'; 
   if (city) {
     fetchWeatherByCity(city, unit); 
+    const dropMenu = document.querySelector('.dropMenu');
+    dropMenu.selectedIndex = 0
   }
 });
 
-document.getElementById("degree").addEventListener("change", function () {
-  let city = document.querySelector(".searchInput").value;
+document.getElementById("degreeToggle").addEventListener("change", function() {
+  let  citySearchValue=document.querySelector(".searchInput").value
+  let  cityMenuValue=document.querySelector('.dropMenu').value
   let unit = this.checked ? 'imperial' : 'metric'; 
-  if (city) {
-    fetchWeatherByCity(city, unit); 
+
+  if(citySearchValue==""){
+    cityMenuValue= document.querySelector('.dropMenu').value
+    fetchWeatherByCity(cityMenuValue, unit); 
+
+  }else{
+    fetchWeatherByCity(citySearchValue, unit); 
+
   }
+  
+    //get data from local storage of latest city...
 });
