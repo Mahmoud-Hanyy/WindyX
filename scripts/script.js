@@ -150,5 +150,5 @@ document.getElementById("degreeToggle").addEventListener("change", function() {
 
   }
   
-    //get data from local storage of latest city...
 });
+
