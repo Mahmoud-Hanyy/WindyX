@@ -150,5 +150,6 @@ document.getElementById("degreeToggle").addEventListener("change", function() {
 
   }
   
+  
 });
 
