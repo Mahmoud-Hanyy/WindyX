@@ -1,4 +1,4 @@
-let apikey;
+let apiKey;
 const baseUrl = "https://api.openweathermap.org/";
 const weatherByCityEndPoint=baseUrl+ "data/2.5/forecast";
 
