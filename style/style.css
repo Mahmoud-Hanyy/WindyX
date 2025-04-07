@@ -180,7 +180,7 @@ body {
     display: block;
     width: 60px;
     height: 60px;
-    background: url('https://cdn-icons-png.flaticon.com/128/12534/12534143.png') no-repeat center;
+    background: var(--weather-icon) no-repeat center;
     background-size: contain;
     margin-bottom: 5px;
 }
@@ -226,22 +226,40 @@ body {
     height: 100vh;
     width: 30rem;
 }
-
-.searchInput{
+.searchContainer {
     position: relative;
     display: flex;
+    align-items: center;
     width: 25rem;
+    margin: 20px 0 0 50px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.searchInput {
+    width: 100%;
     height: 5vh;
-    margin-top: 20px;
-    font-family: poppins;
-    border-radius: 5px;
-    border: 1px solid white;
-    margin-left: 50px;
+    padding: 10px 40px 10px 15px;
     font-size: 0.7rem;
+    font-family: poppins;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.searchInput:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.searchIcon {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 16px;
+    background-size: cover;
+    cursor: pointer;
 }
 
 .dropMenu{
@@ -254,6 +272,7 @@ body {
     border: 1px solid white;
     margin-left: 50px;
     font-size: 0.7rem;
+    padding: 10px 40px 10px 15px;
 }
 
 .historyOfSearch{
@@ -269,66 +288,61 @@ hr{
     width: 90%;
 }
 
-.weatherDeatilsRow{
+.weatherDetailsRow {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.HeaderOfDetails{
+.headerOfDetails {
     padding-left: 40px;
     padding-top: 20px;
     font-size: 26px;
-    margin: 0px;
+    margin: 0;
 }
 .toggleDegree {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 16px;
     padding-right: 40px;
     padding-top: 20px;
     font-size: 26px;
+    position: relative;
 }
-
 .toggleDegree input[type="checkbox"] {
     display: none;
 }
-
 .toggleDegree label {
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 5px;
+    transition: ease 0.3s ease;
 }
 
-.toggleDegree input[type="checkbox"]:checked + label:nth-of-type(1),
-.toggleDegree input[type="checkbox"]:not(:checked) + label:nth-of-type(2) {
-    background: rgb(255, 255, 255);
+.toggleDegree input[type="checkbox"]:not(:checked) + .celsius {
+    background: #ffffff;
 }
 
-.weatherDetailsCol{
+.toggleDegree input[type="checkbox"]:checked + .celsius + .fahrenheit {
+    background: #ffffff;
+}
+.weatherDetailsCol {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 50px;
 }
 
-.weatherAttributes {
-    list-style: none;
-    color: white;
-    font-size: 20px;
-}
-
-.weatherAttributes li{
-    padding-bottom: 20px;
-    padding-top: 10px;
-    margin-top: 0px;
-}
+.weatherAttributes,
 .weatherAttributesValues {
     list-style: none;
-    padding-right: 50px;
-    font-size: 20px;
+    padding: 0;
+    margin: 0;
     color: white;
+    font-size: 20px;
 }
 
-.weatherAttributesValues li{
-    padding-top: 10px;
-    padding-bottom: 20px;
+.weatherAttributes li,
+.weatherAttributesValues li {
+    padding: 10px 0;
 }
