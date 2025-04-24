@@ -1,8 +1,10 @@
 import * as defaultFetch from "./defaultFetch.js";
 import * as searchFetch from "./searchFetch.js";
 import { displayGreeting } from "./greeting.js";
+import { displaySearchHistory } from "./searchHistory.js";
 
 function initializeApp() {
+  
   if (!localStorage.getItem("loggedInUser")) {
     // Redirect to login page if user is not logged in
     window.location.href = "log_in.html";
@@ -27,6 +29,9 @@ function initializeApp() {
 
   // DarkMode Toggle Button Feature
   searchFetch.toggleDarkMode();
+
+  displaySearchHistory();
+
 
 }
 

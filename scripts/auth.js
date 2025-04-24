@@ -10,7 +10,7 @@ const users = [
 
 //add event listener when page is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     //get HTML elements
     const loginBtn = document.getElementById("loginBtn");
     const errorText = document.getElementById("wrongPass");
@@ -29,12 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (user) {
             alert("Login successful!");
             //store username to display greeting
-            localStorage.setItem("loggedInUser", username);
-            //redirect on success to index.html
-            window.location.href = "index.html"; 
+
+            //call succefullogin function
+            handleSuccessfulLogin(username);
+
         } else {
             //show error message only on failure
-            errorText.style.display = "block"; 
+            errorText.style.display = "block";
         }
     });
 
@@ -43,3 +44,21 @@ document.addEventListener("DOMContentLoaded", () => {
         errorText.style.display = "none";
     });
 });
+
+function handleSuccessfulLogin(username) {
+    const userData = {
+        username: username,
+        searchHistory: JSON.parse(localStorage.getItem(`userData_${username}`))?.searchHistory || [],
+        lastCity: JSON.parse(localStorage.getItem(`userData_${username}`))?.lastCity || "",
+    };
+    localStorage.setItem("loggedInUser", username);
+
+    localStorage.setItem(`userData_${username}`, JSON.stringify(userData));
+    //redirect on success to index.html
+    window.location.href = "index.html";
+
+}
+function logOut() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "log_in.html";
+}

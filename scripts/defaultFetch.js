@@ -1,4 +1,5 @@
 import { fetchWeatherByCityAndCountry } from "./searchFetch.js";
+import { getLastCity, updateSearchHistory } from "./searchHistory.js";
 
 const response = await fetch("./api.json");
 const data = await response.json();
@@ -80,8 +81,8 @@ export async function getOpenweathermapEndpoint() {
  */
 export async function fetchCityByDefault() {
   try {
-    const cityName = localStorage.getItem("currentCityAndCountry");
-    console.log(cityName);
+    const city=getLastCity()
+    const cityName = city;    console.log(cityName);
     if (!cityName) {
       return;
     }
@@ -98,7 +99,7 @@ export async function fetchByCurrentGeolocation() {
     const reversedGeolocation = await response.json();
     const cityName = reversedGeolocation[0].name;
     fetchWeatherByCityAndCountry(cityName);
-    localStorage.setItem("currentCityAndCountry", cityName);
+     updateSearchHistory(cityName);
   } catch (error) {
     alert("Please check your internet connection");
   }

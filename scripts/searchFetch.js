@@ -1,3 +1,9 @@
+import { updateSearchHistory } from "./searchHistory.js";
+import { displaySearchHistory } from "./searchHistory.js";
+import { getLastCity } from "./searchHistory.js";
+
+
+
 const response = await fetch("./api.json");
 const data = await response.json();
 const apiKey = data.API_KEY;
@@ -69,6 +75,7 @@ export function searchByCityAndCountryKeypress() {
       const unit = document.getElementById("degreeToggle").checked
         ? "imperial"
         : "metric";
+        updateSearchHistory(cityAndCountry);
 
       fetchWeatherByCityAndCountry(cityAndCountry, unit);
       searchBar.value = "";
@@ -90,6 +97,7 @@ export function searchByCityAndCountryClick() {
       : "metric";
     if (cityAndCountry) {
       fetchWeatherByCityAndCountry(cityAndCountry, unit);
+      updateSearchHistory(cityAndCountry);
       const dropMenu = document.querySelector(".dropMenu");
       dropMenu.selectedIndex = 0;
     }
@@ -116,7 +124,7 @@ export function toggleDarkMode() {
  */
 export function toggleWeatherMeasurement() {
   document.getElementById("degreeToggle").addEventListener("change", () => {
-    const cityAndCountry = localStorage.getItem("currentCityAndCountry");
+    const cityAndCountry = getLastCity();
     const unit = document.getElementById("degreeToggle").checked
       ? "imperial"
       : "metric";
@@ -228,6 +236,8 @@ export async function fetchWeatherByCityAndCountry(
   unit = "metric"
 ) {
   try {
+    document.querySelector('.todayWeather').style.opacity = '0';
+    document.getElementById('weatherForecast').style.opacity = '0';
     const queryString = `?q=${cityAndCountry}&units=${unit}&appid=${apiKey}`;
     const url = weatherByCityEndPoint + `${queryString}`;
     const response = await fetch(url);
@@ -238,7 +248,6 @@ export async function fetchWeatherByCityAndCountry(
       document.querySelector(".searchInput").value = "";
     }
 
-    localStorage.setItem("currentCityAndCountry", cityAndCountry);
     const weatherData = await response.json();
     const currentWeatherList = weatherData.list;
     const currentWeatherData = currentWeatherList[0];
@@ -252,6 +261,12 @@ export async function fetchWeatherByCityAndCountry(
     let dateTime = firstDay.date;
     displayDailyForecast(processedDays.slice(1), unit);
     displayCurrentWeather(weatherDetailsObject, dateTime, icon, unit);
+  
+    updateSearchHistory(cityAndCountry);
+    displaySearchHistory();
+    document.querySelector('.todayWeather').style.opacity = '1';
+    document.getElementById('weatherForecast').style.opacity = '1';
+
   } catch {
     () => {
       alert("please check internet connection");
@@ -260,7 +275,7 @@ export async function fetchWeatherByCityAndCountry(
 }
 
 function displayCurrentWeather(weatherDetailsObject, dateTime, icon, unit) {
-  const city = localStorage.getItem("currentCityAndCountry").split(",")[0];
+  const city = getLastCity();
   document.querySelectorAll(".location").forEach((el) => (el.innerHTML = city));
 
   document.querySelectorAll(".weatherDescription").forEach((el) => {
@@ -317,5 +332,4 @@ function displayCurrentWeather(weatherDetailsObject, dateTime, icon, unit) {
   const weatherForecast = (document.getElementById("weatherForecast").style =
     "");
   document.querySelector(".weatherDetailsCol").style = "";
-  document.getElementById("greetUser").innerText = "";
 }

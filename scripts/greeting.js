@@ -1,6 +1,8 @@
+import { getLastCity } from "./searchHistory.js";
+
 export function getGreeting() {
-  console.log(!localStorage.getItem("loggedInUser"));
-  if (!localStorage.getItem("currentCityAndCountry")) {
+  const city=getLastCity();
+  if (!city || city=="") {
     return {
       greeting: "Hello in your first visit!",
       showWeather: false,
