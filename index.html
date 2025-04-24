@@ -10,17 +10,20 @@
     rel="stylesheet">
   <title>WindyX</title>
   <script type="module" src="scripts/script.js" defer></script>
+  <script src="scripts/auth.js" defer></script>
 
 </head>
 
 <body>
+  
   <div class="weatherContainer">
-
     <!-- the Left Section -->
     <div class="left Section">
       <div class="header">
         <h1 class="projectTitle" id="projectTitle">WindyX</h1>
         <button class="themeToggle" id="themeToggle">&#9775;</button>
+        <img src="imgs/logout.svg"  onclick="logOut()" alt="logout" width="24" height="24">
+
       </div>
       <div class="greetingMessage">
         <p class="greetUser" id="greetUser">Hello, <span class="username">User</span></p>
