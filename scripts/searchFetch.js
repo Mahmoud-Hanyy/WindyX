@@ -37,6 +37,18 @@ const predefinedCities = [
   { city: "Vancouver", country: "CA" },
 ];
 
+// function to delay the appearing of the data for 3 sec
+function dataDebouncing(){
+  document.getElementById("todayWeather").classList.toggle("debouncing");
+  document.getElementById("weatherForecast").classList.toggle("debouncing");
+  document.getElementById("weatherAttributesValues").classList.toggle("debouncing");
+  setTimeout(function(){
+    document.getElementById("todayWeather").classList.toggle("debouncing");
+    document.getElementById("weatherForecast").classList.toggle("debouncing");
+    document.getElementById("weatherAttributesValues").classList.toggle("debouncing");
+  },3000)
+}
+
 export function populateDropDown() {
   const dropMenu = document.querySelector(".dropMenu");
   predefinedCities.forEach((city) => {
@@ -55,6 +67,7 @@ export function populateDropDownOnClick() {
       ? "imperial"
       : "metric";
     fetchWeatherByCityAndCountry(selectedCity, unit);
+    dataDebouncing();
   });
 }
 
@@ -75,6 +88,7 @@ export function searchByCityAndCountryKeypress() {
 
       const dropMenu = document.querySelector(".dropMenu");
       dropMenu.selectedIndex = 0;
+      dataDebouncing();
     }
   });
 }
@@ -92,6 +106,7 @@ export function searchByCityAndCountryClick() {
       fetchWeatherByCityAndCountry(cityAndCountry, unit);
       const dropMenu = document.querySelector(".dropMenu");
       dropMenu.selectedIndex = 0;
+      dataDebouncing();
     }
   });
 }
@@ -314,8 +329,7 @@ function displayCurrentWeather(weatherDetailsObject, dateTime, icon, unit) {
   ).style.backgroundImage = `url('./imgs/${weatherDetailsObject.currentWeatherCondition.toLowerCase()}.jpg')`;
 
   document.querySelector(".todayWeather").style = "";
-  const weatherForecast = (document.getElementById("weatherForecast").style =
-    "");
+  document.getElementById("weatherForecast").style ="";
   document.querySelector(".weatherDetailsCol").style = "";
   document.getElementById("greetUser").innerText = "";
 }
