@@ -27,6 +27,10 @@ function initializeApp() {
 
   // DarkMode Toggle Button Feature
   searchFetch.toggleDarkMode();
+
 }
 
 initializeApp();
+
+
+

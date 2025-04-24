@@ -5,7 +5,6 @@ body {
     height: 100%;
     width: 100%;
     overflow: hidden;
-
 }
 
 * {
@@ -24,7 +23,6 @@ body {
     font-weight: 400;
     font-style: italic;
 }
-
 
 .backgroundImg {
     width: 100%;
@@ -289,7 +287,6 @@ body {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-
 .dropMenu {
     display: flex;
     width: 25rem;
@@ -329,7 +326,6 @@ hr {
     font-size: 26px;
     margin: 0px;
 }
-
 
 .toggleDegree {
     display: flex;
