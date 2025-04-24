@@ -420,3 +420,7 @@ hr {
 .lightHorizontalRule {
     border-color: white;
 }
+
+.debouncing{
+    display: none;
+}
