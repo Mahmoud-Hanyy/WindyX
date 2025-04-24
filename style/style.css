@@ -212,7 +212,7 @@ body {
 }
 
 .day {
-    background: white;
+    background: rgb(111, 111, 111, 0.7);
     border-radius: 10px;
     padding: 10px;
     text-align: center;

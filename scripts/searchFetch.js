@@ -155,7 +155,6 @@ function displayDailyForecast(days, unit) {
  */
 function getWeatherDetails(currentWeatherData) {
   const currentWindSpeed = currentWeatherData.wind.speed;
-  console.log(currentWindSpeed);
   const currentTemp = currentWeatherData.main.temp;
   const currentWeatherCondition = currentWeatherData.weather[0].main;
   const currentDescription = currentWeatherData.weather[0].description;
@@ -224,12 +223,16 @@ function cleanWeatherForecasts(currentWeatherList) {
   return processedDays;
 }
 
-export async function fetchWeatherByCityAndCountry(cityAndCountry, unit) {
+export async function fetchWeatherByCityAndCountry(
+  cityAndCountry,
+  unit = "metric"
+) {
   try {
     const queryString = `?q=${cityAndCountry}&units=${unit}&appid=${apiKey}`;
     const url = weatherByCityEndPoint + `${queryString}`;
     const response = await fetch(url);
-
+    console.log(cityAndCountry);
+    console.log(url);
     if (!response.ok) {
       alert("Please enter city's name correctly");
       document.querySelector(".searchInput").value = "";
@@ -241,6 +244,8 @@ export async function fetchWeatherByCityAndCountry(cityAndCountry, unit) {
     const currentWeatherData = currentWeatherList[0];
     const weatherDetailsObject = getWeatherDetails(currentWeatherData);
     const processedDays = cleanWeatherForecasts(currentWeatherList);
+    console.log(processedDays);
+    console.log(weatherDetailsObject);
 
     const icon = processedDays[0].icon;
     const firstDay = processedDays[0];
@@ -303,10 +308,14 @@ function displayCurrentWeather(weatherDetailsObject, dateTime, icon, unit) {
       (el) => (el.innerHTML = weatherDetailsObject.currentWindSpeed + " m/sec")
     );
 
-  console.log(weatherDetailsObject);
-
   // Change the background image based on the current weather and chosen mode
   document.querySelector(
     ".weatherContainer"
   ).style.backgroundImage = `url('./imgs/${weatherDetailsObject.currentWeatherCondition.toLowerCase()}.jpg')`;
+
+  document.querySelector(".todayWeather").style = "";
+  const weatherForecast = (document.getElementById("weatherForecast").style =
+    "");
+  document.querySelector(".weatherDetailsCol").style = "";
+  document.getElementById("greetUser").innerText = "";
 }
