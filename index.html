@@ -1,107 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>WindyX</title>
-    <script src="scripts/script.js" defer></script>
-  </head>
-  <body>
-    <div class="weatherContainer">
-
-      <!-- the Left Section -->
-      <div class="left Section">
-        <div class="header">
-          <h1 class="projectTitle" id="projectTitle">WindyX</h1>
-          <button class="themeToggle" id="themeToggle">&#9775;</button>
-        </div>
-        <div class="greetingMessage">
-          <p class="greetUser" id="greetUser">Hello, <span class="username">User</span></p>
-        </div>
-        <div class="todayWeather">
-          <h2 class="temperature" id="todayTemp">20°</h2>
-          <div class="detailedWeather">
-            <h3 class="location" id="location">Alexandria</h3>
-            <p class="date-time" id="dateTime">
-              10:00 - Wednesday, 2 Apr '25
-            </p>  
-          </div>
-              <p class="weatherDescription" id="todayWeatherDesc">Rainy</p>
-        </div>
-        <div class="weatherForcast" id="weatherForecast">
-          <div class="day" id="day1">
-            <p>13 Apr '25</p>
-            <p>26°</p>
-            <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
-          </div>
-          <div class="day" id="day2">
-            <p>14 Apr '25</p>
-            <p>27°</p>
-            <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
-          </div>
-          <div class="day" id="day3">
-            <p>15 Apr '25</p>
-            <p>23°</p>
-            <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
-          </div>
-        </div>
-      </div>
-
-      <!-- the Right Section -->
-      <div class="rightSection">
-        <div class="searchContainer">
-          <input type="text" 
-          class="searchInput" 
-          placeholder=" Search for a city..."
-          id="searchInput"/>
-          <div class="searchIcon" id="searchIcon"></div>
-        </div>
-        <select class="dropMenu">
-            <option>Select a city</option>
-            <option>Cairo, Egypt</option>
-            <option>London, UK</option>
-            <option>Rome, Italy</option>
-            <option>New York, USA</option>
-            <option>Tokyo, Japan</option>
-            <option>Sydney, Australia</option>
-        </select>
-        <ul class="historyOfSearch">
-          <li>Cairo, Egypt</li>
-          <li>Berlin, Germany</li>
-          <li>London, UK</li>
-          <li>Rome, Italy</li>
-          <li>Madrid, Spain</li>
-        </ul>
-        <hr>
-        <div class="weatherDeatilsRow">
-          <h4 class="HeaderOfDetails">Weather details</h4>
-          <div class="toggleDegree">
-            <input type="checkbox" id="degreeToggle" class="toggle-input">
-            <label for="degreeToggle" class="toggle-switch">
-              <span class="celsius">°C</span>
-              <span class="fahrenheit">°F</span>
-            </label>
-          </div>
-        </div>
-
-          <div class="weatherDetailsCol">
-            <ul class="weatherAttributes">
-              <li >Temperature</li>
-              <li >Weather Description</li>
-              <li >Humidity</li>
-              <li >Wind</li>
-            </ul>
   
-            <ul class="weatherAttributesValues">
-              <li class="right-temperature">27°</li>
-              <li class ="right-weatherDescription">Sunny</li>
-              <li class ="right-weatherHumidity">23%</li>
-              <li class="right-weatherWind">8 m/sec</li>
-            </ul>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./style/style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <title>WindyX</title>
+  <script type="module" src="scripts/script.js" defer></script>
+
+</head>
+
+<body>
+  <div class="weatherContainer">
+
+    <!-- the Left Section -->
+    <div class="left Section">
+      <div class="header">
+        <h1 class="projectTitle" id="projectTitle">WindyX</h1>
+        <button class="themeToggle" id="themeToggle">&#9775;</button>
+      </div>
+      <div class="greetingMessage">
+        <p class="greetUser" id="greetUser">Hello, <span class="username">User</span></p>
+      </div>
+      <div class="todayWeather">
+        <h2 class="temperature" id="todayTemp">20°</h2>
+        <div class="detailedWeather">
+          <h3 class="location" id="location">Alexandria</h3>
+          <p class="date-time" id="dateTime">
+            10:00 - Wednesday, 2 Apr '25
+          </p>
+        </div>
+        <!--   <img id="current-weather-image" -->
+        <p class="weatherDescription" id="todayWeatherDesc">Rainy</p>
+      </div>
+      <div class="weatherForcast" id="weatherForecast">
+        <div class="day" id="day1">
+          <p>13 Apr '25</p>
+          <p>26°</p>
+          <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
+        </div>
+        <div class="day" id="day2">
+          <p>14 Apr '25</p>
+          <p>27°</p>
+          <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
+        </div>
+        <div class="day" id="day3">
+          <p>15 Apr '25</p>
+          <p>23°</p>
+          <img src="https://cdn-icons-png.flaticon.com/128/12534/12534143.png">
+        </div>
       </div>
     </div>
-  </body>
+    
+    <!-- the Right Section -->
+    <div class="rightSection">
+      <div class="searchContainer">
+        <input type="text" class="searchInput" placeholder=" Search for a city..." id="searchInput" />
+        <div class="searchIcon" id="searchIcon"></div>
+
+      </div>
+      <select class="dropMenu">
+        <option>Select a city</option>
+      </select>
+      <ul class="historyOfSearch">
+        <li>Cairo, Egypt</li>
+        <li>Berlin, Germany</li>
+        <li>London, UK</li>
+        <li>Rome, Italy</li>
+        <li>Madrid, Spain</li>
+      </ul>
+      <hr>
+      <div class="weatherDeatilsRow">
+        <h4 class="HeaderOfDetails">Weather details</h4>
+        <div class="toggleDegree">
+          <input type="checkbox" id="degreeToggle" class="toggle-input">
+          <label for="degreeToggle" class="toggle-switch">
+            <span class="celsius">°C</span>
+            <span class="fahrenheit">°F</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="weatherDetailsCol">
+        <ul class="weatherAttributes">
+          <li>Temperature</li>
+          <li>Weather Description</li>
+          <li>Humidity</li>
+          <li>Wind</li>
+        </ul>
+
+        <ul class="weatherAttributesValues">
+          <li class="right-temperature">27°</li>
+          <li class="right-weatherDescription">Sunny</li>
+          <li class="right-weatherHumidity">23%</li>
+          <li class="right-weatherWind">8 m/sec</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
