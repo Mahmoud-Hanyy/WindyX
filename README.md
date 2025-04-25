@@ -24,8 +24,8 @@ about the locations they're interested in.
   - [x] Search Weather by City
     - [x] Users can select a city from a predefined dropdown list.
     - [x] Users can enter a city and country name manually to fetch weather 
-    details, implement debouncing (3-second delay) for manual input before 
-   fetching data.
+    details, implement debouncing (3-second delay) for manual input and 
+    predefined dropdown list before fetching data.
     - [x] Handle API errors when the user writes wrong city or country.
   - [x] Persist Last Search
     - [x] When the user revisits the website, display the last searched 
@@ -43,6 +43,8 @@ about the locations they're interested in.
   - [x] Make a login page, after the user logs in, he could see the homepage,
   otherwise he must login first.
   - [x] Make a stunning eye-catching design.
+  - [x] User is able to change weather units (Fahrenheit to Celsius 
+  and vice versa).
 
 ## Installation Instructions
 To get started with WindyX, follow these steps:
